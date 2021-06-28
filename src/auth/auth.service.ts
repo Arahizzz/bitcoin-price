@@ -21,8 +21,8 @@ export class AuthService {
 
     async checkLogin(login: string, password: string): Promise<JwtPayload | null> {
         const user = await this.users.getUser(login);
-        if (await bcrypt.compare(password, user.hash))
-            return { usrname: login };
+        if (user && await bcrypt.compare(password, user.hash))
+            return { username: login };
         return null;
     }
 

@@ -18,8 +18,10 @@ exists(SAVE_FOLDER).then(e => { if (!e) fs.promises.mkdir(SAVE_FOLDER) });
 
 @Injectable()
 export class UsersService {
-    async getUser(username: string) {
+    async getUser(username: string): Promise<User | null> {
         const savePath = this.getFilePath(username);
+        if (!await exists(savePath))
+            return null;
         const data = await fs.promises.readFile(savePath);
         return JSON.parse(data.toString()) as User;
     }
