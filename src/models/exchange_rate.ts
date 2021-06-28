@@ -1,6 +1,6 @@
 export interface ExchangeRate {
     baseCurrency: Currency,
-    comparedCurrency: Currency,
+    convertedCurrency: Currency,
     rate: number 
 }
 
